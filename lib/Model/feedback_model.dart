@@ -15,6 +15,7 @@ class FeedbackModel {
   String? kp_home_score;
   String? kp_total_score;
   String? avg_total;
+  String? date;
 
   FeedbackModel(
       {this.away,
@@ -30,7 +31,8 @@ class FeedbackModel {
       this.kp_away_score,
       this.kp_home_score,
       this.kp_total_score,
-      this.avg_total});
+      this.avg_total,
+      this.date});
 
   factory FeedbackModel.fromJson(dynamic json) {
     return FeedbackModel(
@@ -48,6 +50,7 @@ class FeedbackModel {
       kp_home_score: jsonDecode(json['kp_home_score']),
       kp_total_score: jsonDecode(json['kp_total_sc']),
       avg_total: jsonDecode(json['avg_total']),
+      date: jsonDecode(json['date']),
     );
   }
 
@@ -66,5 +69,6 @@ class FeedbackModel {
         "kp_home_score": kp_home_score,
         "kp_total_sc": kp_total_score,
         "avg_total": avg_total,
+        "date": date,
       };
 }
