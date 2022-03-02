@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'dart:convert' as convert;
 
 import 'package:sports/Model/feedback_model.dart';
@@ -7,115 +8,55 @@ import 'package:sports/Model/feedback_model.dart';
 import 'detail.dart';
 
 class Home extends StatefulWidget {
+  List<FeedbackModel> feedback;
+  List<FeedbackModel> feedback2;
+  List<FeedbackModel> feedback3;
+  // List <String> dateList;
+  // List <String> dateList2;
+  // List <String> dateList3;
+  Home({
+    Key? key,
+    required this.feedback,
+    required this.feedback2,
+    required this.feedback3,
+  }) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  // ignore: deprecated_member_use
-  //All the data of first sheet is stored in the feedbacks variable
-  List<FeedbackModel> feedbacks = <FeedbackModel>[];
-  //All the data of second sheet is stored in the feedbacks2 variable
-  List<FeedbackModel> feedbacks2 = <FeedbackModel>[];
-  //All the data of second sheet is stored in the feedbacks3 variable
-  List<FeedbackModel> feedbacks3 = <FeedbackModel>[];
-
-  getFeedbackFromSheet() async {
-    //This is the first Sheet
-    var raw = await http.get(Uri.parse(
-        "https://script.google.com/macros/s/AKfycby0dTZBvFz_23p4kFkL5Wlzzp6uWzKAK1xhej3nhoEjg95XDWYm-kc_N58-RayO-pc/exec"));
-    var jsonFeedback = convert.jsonDecode(raw.body);
-    print('this is json Feedback $jsonFeedback');
-
-    // feedbacks = jsonFeedback.map((json) => FeedbackModel.fromJson(json));
-
-    jsonFeedback.forEach((element) {
-      print('$element THIS IS NEXT>>>>>>>');
-      FeedbackModel feedbackModel = FeedbackModel();
-      feedbackModel.away = element['away'];
-      feedbackModel.home = element['home'];
-      feedbackModel.home_line = element['home_line'].toString();
-      feedbackModel.total = element['total'].toString();
-      feedbackModel.bc_away_score = element["bc_away_score"].toString();
-      feedbackModel.bc_home_score = element['bc_home_score'].toString();
-      feedbackModel.bc_total_score = element['bc_total_sc'].toString();
-      feedbackModel.guest_away_score = element["guest_away_score"].toString();
-      feedbackModel.guest_home_score = element['guest_home_score'].toString();
-      feedbackModel.guest_total_score = element['guest_total_sc'].toString();
-      feedbackModel.kp_away_score = element["kp_away_score"].toString();
-      feedbackModel.kp_home_score = element['kp_home_score'].toString();
-      feedbackModel.kp_total_score = element['kp_total_score'].toString();
-      feedbackModel.avg_total = element['avg_total'].toString();
-
-      feedbacks.add(feedbackModel);
-    });
-    //This is second sheet
-    var raw2 = await http.get(Uri.parse(
-        "https://script.google.com/macros/s/AKfycbwKxzD3Z0B0ndZlCdpbGwE6l41AM3qUR1Uy6AhXv_OIH67XgxkaAeFA76zZy6HeLsAf/exec"));
-    var jsonFeedback2 = convert.jsonDecode(raw2.body);
-    print('this is json Feedback $jsonFeedback2');
-
-    // feedbacks = jsonFeedback.map((json) => FeedbackModel.fromJson(json));
-
-    jsonFeedback2.forEach((element2) {
-      print('$element2 THIS IS NEXT>>>>>>>');
-      FeedbackModel feedbackModel2 = FeedbackModel();
-      feedbackModel2.away = element2['away'];
-      feedbackModel2.home = element2['home'];
-      feedbackModel2.home_line = element2['home_line'].toString();
-      feedbackModel2.total = element2['total'].toString();
-      feedbackModel2.bc_away_score = element2["bc_away_score"].toString();
-      feedbackModel2.bc_home_score = element2['bc_home_score'].toString();
-      feedbackModel2.bc_total_score = element2['bc_total_sc'].toString();
-      feedbackModel2.guest_away_score = element2["guest_away_score"].toString();
-      feedbackModel2.guest_home_score = element2['guest_home_score'].toString();
-      feedbackModel2.guest_total_score = element2['guest_total_sc'].toString();
-      feedbackModel2.kp_away_score = element2["kp_away_score"].toString();
-      feedbackModel2.kp_home_score = element2['kp_home_score'].toString();
-      feedbackModel2.kp_total_score = element2['kp_total_score'].toString();
-      feedbackModel2.avg_total = element2['avg_total'].toString();
-
-      feedbacks2.add(feedbackModel2);
-    });
-    //This is second sheet
-    var raw3 = await http.get(Uri.parse(
-        "https://script.google.com/macros/s/AKfycbwXTUMxBC_-zR-ao7E9uXJ768_X7cSmaYlecCX7buG-fJ81qnWJRtclgU_wS1B6zGh2/exec"));
-    var jsonFeedback3 = convert.jsonDecode(raw3.body);
-    print('this is json Feedback $jsonFeedback3');
-
-    // feedbacks = jsonFeedback.map((json) => FeedbackModel.fromJson(json));
-
-    jsonFeedback3.forEach((element3) {
-      print('$element3 THIS IS NEXT>>>>>>>');
-      FeedbackModel feedbackModel3 = FeedbackModel();
-      feedbackModel3.away = element3['away'];
-      feedbackModel3.home = element3['home'];
-      feedbackModel3.home_line = element3['home_line'].toString();
-      feedbackModel3.total = element3['total'].toString();
-      feedbackModel3.bc_away_score = element3["bc_away_score"].toString();
-      feedbackModel3.bc_home_score = element3['bc_home_score'].toString();
-      feedbackModel3.bc_total_score = element3['bc_total_sc'].toString();
-      feedbackModel3.guest_away_score = element3["guest_away_score"].toString();
-      feedbackModel3.guest_home_score = element3['guest_home_score'].toString();
-      feedbackModel3.guest_total_score = element3['guest_total_sc'].toString();
-      feedbackModel3.kp_away_score = element3["kp_away_score"].toString();
-      feedbackModel3.kp_home_score = element3['kp_home_score'].toString();
-      feedbackModel3.kp_total_score = element3['kp_total_score'].toString();
-      feedbackModel3.avg_total = element3['avg_total'].toString();
-
-      feedbacks3.add(feedbackModel3);
-    });
-    //print('${feedbacks[0]}');
+  List<String> dateList = [];
+  List<String> dateList2 = [];
+  List<String> dateList3 = [];
+  Future getDateList() async {
+    await widget.feedback;
+    await widget.feedback2;
+    await widget.feedback3;
+    for (var i = 0; i < widget.feedback.length; i++) {
+      dateList.add(widget.feedback[i].date.toString());
+    }
+    for (var i = 0; i < widget.feedback2.length; i++) {
+      dateList2.add(widget.feedback2[i].total.toString());
+    }
+    for (var i = 0; i < widget.feedback3.length; i++) {
+      dateList3.add(widget.feedback3[i].total.toString());
+    }
+    print("This is date list $dateList");
   }
 
+  String date = 'Fri 02';
   @override
   void initState() {
-    getFeedbackFromSheet();
     super.initState();
+    getDateList();
+    //date=  await widget.dateList[0];
   }
 
   @override
   Widget build(BuildContext context) {
+    dateList=dateList.toSet().toList();
+    print(dateList);
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     return DefaultTabController(
@@ -132,9 +73,11 @@ class _HomeState extends State<Home> {
               backgroundColor: Colors.white,
               elevation: 0.0,
               actions: [
-                IconButton(onPressed: (){
-                  getFeedbackFromSheet();
-                }, icon: Icon(Icons.replay))
+                IconButton(
+                    onPressed: () {
+                      //getFeedbackFromSheet();
+                    },
+                    icon: Icon(Icons.replay))
               ],
               bottom: PreferredSize(
                 child: Column(
@@ -170,22 +113,44 @@ class _HomeState extends State<Home> {
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () => {},
-                            child: Text('02 Mar 22')),
-                          Text('03 Mar 22'),
-                          Text('04 Mar 22'),
-                          Text('05 Mar 22'),
-                          // Text('02 Feb 22')
-                        ],
-                      ),
+                    Container(
+                      height: height * .05,
+                      width: width,
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: ListView.builder(
+                          itemCount: dateList.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () => setState(() {
+                                date = dateList[index];
+                              }),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: width * .03,
+                                    vertical: height * .015),
+                                child: Text(dateList[index].toString()),
+                              ),
+                            );
+                          }),
                     )
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 20, vertical: 10),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       ListView.builder(
+                    //         shrinkWrap: true,
+                    //         itemCount: dateList.length,
+                    //         itemBuilder: (context,index){
+                    //         return Text(dateList[index].toString());
+                    //       })
+                    //       // Text('02 Feb 22')
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
                 preferredSize: Size.fromHeight(height * .15),
@@ -197,472 +162,452 @@ class _HomeState extends State<Home> {
           ),
           body: TabBarView(children: [
             //This is the First sheet data
-            feedbacks == null
-                ? Center(
-                    child: Text('No Data to show'),
-                  )
-                : ListView.builder(
-                    itemCount: feedbacks.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                            left: width * .04,
-                            right: width * .04,
-                            top: width * .03),
-                        child: GestureDetector(
-                          onDoubleTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  feedback: feedbacks,
-                                  index: index,
-                                ),
-                              )),
-                          child: Card(
-                            child: SizedBox(
-                              height: height * .3,
-                              width: width * .9,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                          height: height * .16,
-                                          width: width * .3,
-                                          child: Column(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  'Assets/barca.png',
-                                                ),
-                                                width: width * .25,
-                                                height: width * .25,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              Text(
-                                                feedbacks[index]
-                                                    .away
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          )),
-                                      const Text("VS",
-                                          style: TextStyle(
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                          height: height * .16,
-                                          width: width * .3,
-                                          child: Column(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  'Assets/barca.png',
-                                                ),
-                                                width: width * .25,
-                                                height: width * .25,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              Text(
-                                                feedbacks[index]
-                                                    .home
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                  const Divider(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: const ListTile(
-                                          title: Text(
-                                            'Who will win?',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          subtitle: Text('Away win',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: ListTile(
-                                          title: const Text('Total Points',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                          subtitle: Text(
-                                              feedbacks[index].total.toString(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: ListTile(
-                                          title: const Text('Final Score',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                          subtitle: Text(
-                                              '${feedbacks[index].bc_away_score.toString()} : ${feedbacks[index].bc_home_score.toString()}',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+            BasketballCard(width, height, date),
             //This is the Seconde sheet data
-            feedbacks2 == null
-                ? Center(
-                    child: Text('No Data to show'),
-                  )
-                : ListView.builder(
-                    itemCount: feedbacks2.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                            left: width * .04,
-                            right: width * .04,
-                            top: width * .03),
-                        child: GestureDetector(
-                          onDoubleTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  feedback: feedbacks2,
-                                  index: index,
-                                ),
-                              )),
-                          child: Card(
-                            child: SizedBox(
-                              height: height * .3,
-                              width: width * .9,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                          height: height * .16,
-                                          width: width * .3,
-                                          child: Column(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  'Assets/barca.png',
-                                                ),
-                                                width: width * .25,
-                                                height: width * .25,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              Text(
-                                                feedbacks2[index]
-                                                    .away
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          )),
-                                      const Text("VS",
-                                          style: TextStyle(
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                          height: height * .16,
-                                          width: width * .3,
-                                          child: Column(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  'Assets/barca.png',
-                                                ),
-                                                width: width * .25,
-                                                height: width * .25,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              Text(
-                                                feedbacks2[index]
-                                                    .home
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                  const Divider(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: const ListTile(
-                                          title: Text(
-                                            'Who will win?',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          subtitle: Text('Away win',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: ListTile(
-                                          title: const Text('Total Points',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                          subtitle: Text(
-                                              feedbacks2[index]
-                                                  .total
-                                                  .toString(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: ListTile(
-                                          title: const Text('Final Score',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                          subtitle: Text(
-                                              '${feedbacks2[index].bc_away_score.toString()} : ${feedbacks2[index].bc_home_score.toString()}',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+            FootballCard(width, height, date),
             //This is the third sheet data
-            feedbacks3 == null
-                ? Center(
-                    child: Text('No Data to show'),
-                  )
-                : ListView.builder(
-                    itemCount: feedbacks3.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: EdgeInsets.only(
-                            left: width * .04,
-                            right: width * .04,
-                            top: width * .03),
-                        child: GestureDetector(
-                          onDoubleTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => DetailPage(
-                                  feedback: feedbacks3,
-                                  index: index,
-                                ),
-                              )),
-                          child: Card(
-                            child: SizedBox(
-                              height: height * .3,
-                              width: width * .9,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                          height: height * .16,
-                                          width: width * .3,
-                                          child: Column(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  'Assets/barca.png',
-                                                ),
-                                                width: width * .25,
-                                                height: width * .25,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              Text(
-                                                feedbacks3[index]
-                                                    .away
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          )),
-                                      const Text("VS",
-                                          style: TextStyle(
-                                              fontSize: 28,
-                                              fontWeight: FontWeight.bold)),
-                                      SizedBox(
-                                          height: height * .16,
-                                          width: width * .3,
-                                          child: Column(
-                                            children: [
-                                              Image(
-                                                image: AssetImage(
-                                                  'Assets/barca.png',
-                                                ),
-                                                width: width * .25,
-                                                height: width * .25,
-                                                fit: BoxFit.fill,
-                                              ),
-                                              Text(
-                                                feedbacks3[index]
-                                                    .home
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight:
-                                                        FontWeight.w500),
-                                              ),
-                                            ],
-                                          )),
-                                    ],
-                                  ),
-                                  const Divider(),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: const ListTile(
-                                          title: Text(
-                                            'Who will win?',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                          subtitle: Text('Away win',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: ListTile(
-                                          title: const Text('Total Points',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                          subtitle: Text(
-                                              feedbacks3[index]
-                                                  .total
-                                                  .toString(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: height * .1,
-                                        width: width * .28,
-                                        child: ListTile(
-                                          title: const Text('Final Score',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                          subtitle: Text(
-                                              '${feedbacks3[index].bc_away_score.toString()} : ${feedbacks3[index].bc_home_score.toString()}',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w500)),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      );
-                    }),
+            HandballCard(width, height, date),
           ])),
     );
+  }
+
+  ListView HandballCard(double width, double height, String date) {
+    return ListView.builder(
+        itemCount: widget.feedback3.length,
+        itemBuilder: (context, index) {
+          return date == widget.feedback3[index].date
+              ? Padding(
+                  padding: EdgeInsets.only(
+                      left: width * .04, right: width * .04, top: width * .03),
+                  child: GestureDetector(
+                    onDoubleTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPage(
+                            feedback: widget.feedback3,
+                            index: index,
+                          ),
+                        )),
+                    child: Card(
+                      child: SizedBox(
+                        height: height * .3,
+                        width: width * .9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                    height: height * .16,
+                                    width: width * .3,
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                            'Assets/barca.png',
+                                          ),
+                                          width: width * .25,
+                                          height: width * .25,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Text(
+                                          widget.feedback3[index].away
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )),
+                                const Text("VS",
+                                    style: TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                    height: height * .16,
+                                    width: width * .3,
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                            'Assets/barca.png',
+                                          ),
+                                          width: width * .25,
+                                          height: width * .25,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Text(
+                                          widget.feedback3[index].home
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                            const Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: const ListTile(
+                                    title: Text(
+                                      'Who will win?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    subtitle: Text('Away win',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: ListTile(
+                                    title: const Text('Total Points',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                    subtitle: Text(
+                                        widget.feedback3[index].total
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: ListTile(
+                                    title: const Text('Final Score',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                    subtitle: Text(
+                                        '${widget.feedback3[index].bc_away_score.toString()} : ${widget.feedback3[index].bc_home_score.toString()}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox();
+        });
+  }
+
+  ListView FootballCard(double width, double height, String date) {
+    return ListView.builder(
+        itemCount: widget.feedback2.length,
+        itemBuilder: (context, index) {
+          return date == widget.feedback2[index].date
+              ? Padding(
+                  padding: EdgeInsets.only(
+                      left: width * .04, right: width * .04, top: width * .03),
+                  child: GestureDetector(
+                    onDoubleTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPage(
+                            feedback: widget.feedback2,
+                            index: index,
+                          ),
+                        )),
+                    child: Card(
+                      child: SizedBox(
+                        height: height * .3,
+                        width: width * .9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                    height: height * .16,
+                                    width: width * .3,
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                            'Assets/barca.png',
+                                          ),
+                                          width: width * .25,
+                                          height: width * .25,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Text(
+                                          widget.feedback2[index].away
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )),
+                                const Text("VS",
+                                    style: TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                    height: height * .16,
+                                    width: width * .3,
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                            'Assets/barca.png',
+                                          ),
+                                          width: width * .25,
+                                          height: width * .25,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Text(
+                                          widget.feedback2[index].home
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                            const Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: const ListTile(
+                                    title: Text(
+                                      'Who will win?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    subtitle: Text('Away win',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: ListTile(
+                                    title: const Text('Total Points',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                    subtitle: Text(
+                                        widget.feedback2[index].total
+                                            .toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: ListTile(
+                                    title: const Text('Final Score',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                    subtitle: Text(
+                                        '${widget.feedback2[index].bc_away_score.toString()} : ${widget.feedback2[index].bc_home_score.toString()}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox();
+        });
+  }
+
+  ListView BasketballCard(double width, double height, String date) {
+    return ListView.builder(
+        itemCount: widget.feedback.length,
+        itemBuilder: (context, index) {
+          return date == widget.feedback[index].date
+              ? Padding(
+                  padding: EdgeInsets.only(
+                      left: width * .04, right: width * .04, top: width * .03),
+                  child: GestureDetector(
+                    onDoubleTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPage(
+                            feedback: widget.feedback,
+                            index: index,
+                          ),
+                        )),
+                    child: Card(
+                      child: SizedBox(
+                        height: height * .3,
+                        width: width * .9,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                    height: height * .16,
+                                    width: width * .3,
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                            'Assets/barca.png',
+                                          ),
+                                          width: width * .25,
+                                          height: width * .25,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Text(
+                                          widget.feedback[index].away
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )),
+                                const Text("VS",
+                                    style: TextStyle(
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.bold)),
+                                SizedBox(
+                                    height: height * .16,
+                                    width: width * .3,
+                                    child: Column(
+                                      children: [
+                                        Image(
+                                          image: AssetImage(
+                                            'Assets/barca.png',
+                                          ),
+                                          width: width * .25,
+                                          height: width * .25,
+                                          fit: BoxFit.fill,
+                                        ),
+                                        Text(
+                                          widget.feedback[index].home
+                                              .toString(),
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                            const Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: const ListTile(
+                                    title: Text(
+                                      'Who will win?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    subtitle: Text('Away win',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: ListTile(
+                                    title: const Text('Total Points',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                    subtitle: Text(
+                                        widget.feedback[index].total.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: height * .1,
+                                  width: width * .28,
+                                  child: ListTile(
+                                    title: const Text('Final Score',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                    subtitle: Text(
+                                        '${widget.feedback[index].bc_away_score.toString()} : ${widget.feedback[index].bc_home_score.toString()}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : SizedBox();
+        });
   }
 }
