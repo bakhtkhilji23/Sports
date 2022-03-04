@@ -57,7 +57,7 @@ class DetailPage extends StatelessWidget {
             height: 50,
           ),
           DataTable(columns: const [
-            DataColumn(label: Text('Analysis 👇🏽',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+            DataColumn(label: Text('Possible Outcomes',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
             DataColumn(label: Text('Away',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
             DataColumn(label: Text('Home',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
           ], rows: [
@@ -78,7 +78,7 @@ class DetailPage extends StatelessWidget {
             ]),
             DataRow(cells: [
               const DataCell(Text('Game Total')),
-              const DataCell(Text('👉🏾👉🏾👉🏾')),
+              const DataCell(Text('→')),
               DataCell(Text(feedback[index].avg_total.toString(),style: const TextStyle(color: Colors.red,fontWeight: FontWeight.w500))),
             ])
           ]),
