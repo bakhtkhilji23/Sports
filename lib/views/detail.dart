@@ -20,14 +20,14 @@ class DetailPage extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: Colors.transparent,
         title: const Text(
-          "Bettor Sports Data",
+          "Bettor Chance",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: false,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 10),
-            child: Image(image: AssetImage("Assets/App Logo.jpg")),
+            child: Image(image: AssetImage("Assets/logo.jpeg")),
           ),
         ],
       ),

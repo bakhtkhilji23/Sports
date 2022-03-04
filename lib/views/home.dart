@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
           appBar: AppBar(
               iconTheme: const IconThemeData(color: Colors.black),
               title: const Text(
-                "BetHero",
+                "Bettors chance",
                 style: TextStyle(color: Colors.black),
               ),
               centerTitle: true,
@@ -120,16 +120,16 @@ class _HomeState extends State<Home> {
                 unselectedLabelColor: Colors.grey,
                 tabs: [
                   Tab(
-                    text: 'Basketball',
+                    text: 'College',
                     icon: Icon(Icons.sports_basketball_outlined),
                   ),
                   Tab(
-                    text: 'Hockey',
-                    icon: Icon(Icons.sports_hockey_outlined),
+                    text: 'College Football',
+                    icon: Icon(Icons.sports_football_outlined),
                   ),
                   Tab(
-                    text: 'Handball',
-                    icon: Icon(Icons.sports_handball_outlined),
+                    text: 'NFL',
+                    icon: Icon(Icons.sports_football_outlined),
                   ),
                 ],
               )),
@@ -217,7 +217,7 @@ class _HomeState extends State<Home> {
                                             ),
                                           ],
                                         )),
-                                    const Text("VS",
+                                    const Text("at",
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold)),
@@ -255,7 +255,7 @@ class _HomeState extends State<Home> {
                                       width: width * .28,
                                       child: const ListTile(
                                         title: Text(
-                                          'Who will win?',
+                                          'Projected Scores',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 12,
@@ -272,7 +272,7 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: ListTile(
-                                        title: const Text('Total Points',
+                                        title: const Text('Betting Total',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
@@ -290,13 +290,14 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: ListTile(
-                                        title: const Text('Final Score',
+                                        title: const Text('Line',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                         subtitle: Text(
-                                            '${widget.feedback3[index].bc_away_score.toString()} : ${widget.feedback3[index].bc_home_score.toString()}',
+                                          widget.feedback3[index].home_line.toString(),
+                                            // '${widget.feedback3[index].bc_away_score.toString()} : ${widget.feedback3[index].bc_home_score.toString()}',
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
                                                 fontSize: 12,
@@ -393,7 +394,7 @@ class _HomeState extends State<Home> {
                                             ),
                                           ],
                                         )),
-                                    const Text("VS",
+                                    const Text("at",
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold)),
@@ -431,7 +432,7 @@ class _HomeState extends State<Home> {
                                       width: width * .28,
                                       child: const ListTile(
                                         title: Text(
-                                          'Who will win?',
+                                          'Projected Scores',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 12,
@@ -448,7 +449,7 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: ListTile(
-                                        title: const Text('Total Points',
+                                        title: const Text('Betting Total',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
@@ -466,15 +467,16 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: ListTile(
-                                        title: const Text('Final Score',
+                                        title: const Text('Line',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                         subtitle: Text(
-                                            '${widget.feedback2[index].bc_away_score.toString()} : ${widget.feedback2[index].bc_home_score.toString()}',
+                                          widget.feedback2[index].home_line.toString(),
+                                            // '${widget.feedback2[index].bc_away_score.toString()} : ${widget.feedback2[index].bc_home_score.toString()}',
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                       ),
@@ -552,7 +554,7 @@ class _HomeState extends State<Home> {
                                             ),
                                           ],
                                         )),
-                                    const Text("VS",
+                                    const Text("at",
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.bold)),
@@ -590,7 +592,7 @@ class _HomeState extends State<Home> {
                                       width: width * .28,
                                       child: const ListTile(
                                         title: Text(
-                                          'Who will win?',
+                                          'Projected Scores?',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontSize: 12,
@@ -607,7 +609,7 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: ListTile(
-                                        title: const Text('Total Points',
+                                        title: const Text('Betting Total',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
@@ -625,15 +627,16 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: ListTile(
-                                        title: const Text('Final Score',
+                                        title: const Text('Line',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                         subtitle: Text(
-                                            '${widget.feedback[index].bc_away_score.toString()} : ${widget.feedback[index].bc_home_score.toString()}',
+                                          widget.feedback[index].home_line.toString(),
+                                            // '${widget.feedback[index].bc_away_score.toString()} : ${widget.feedback[index].bc_home_score.toString()}',
                                             textAlign: TextAlign.center,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                       ),
