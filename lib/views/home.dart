@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'dart:convert' as convert;
 
 import 'package:sports/Model/feedback_model.dart';
+import 'package:sports/views/splash.dart';
 
 import 'detail.dart';
 
@@ -85,13 +86,13 @@ class _HomeState extends State<Home> {
       footballTab.add(Tab(
         text: item,
       ));
-      footballWidget.add(BasketballCard(width, height, item));
+      footballWidget.add(FootballCard(width, height, item));
     }
     for (var item in dateList3) {
       handballTab.add(Tab(
         text: item,
       ));
-      handballWidget.add(BasketballCard(width, height, item));
+      handballWidget.add(HandballCard(width, height, item));
     }
 
     return DefaultTabController(
@@ -99,9 +100,10 @@ class _HomeState extends State<Home> {
       child: Scaffold(
           backgroundColor: Colors.grey[300],
           appBar: AppBar(
+            leading: Icon(Icons.menu),
               iconTheme: const IconThemeData(color: Colors.black),
               title: const Text(
-                "Bettors chance",
+                "BC Sports Betting",
                 style: TextStyle(color: Colors.black),
               ),
               centerTitle: true,
@@ -114,32 +116,48 @@ class _HomeState extends State<Home> {
               //       },
               //       icon: Icon(Icons.replay))
               // ],
-              bottom: const TabBar(
+              bottom: TabBar(
                 indicatorColor: Colors.red,
                 labelColor: Colors.red,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
                   Tab(
                     text: 'College',
-                    icon: Icon(Icons.sports_basketball_outlined),
+                    icon: Image.asset(
+                      "Assets/bball.png",
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.fitWidth,
+                    ), // Icon(Icons.sports_basketball_outlined),
                   ),
                   Tab(
                     text: 'College Football',
-                    icon: Icon(Icons.sports_football_outlined),
+                    icon: Image.asset(
+                      "Assets/Helmet.png",
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                   Tab(
                     text: 'NFL',
-                    icon: Icon(Icons.sports_football_outlined),
+                    icon: Image.asset(
+                      "Assets/dball.png",
+                      width: 40,
+                      height: 40,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                 ],
               )),
-          drawer: Drawer(
-            child: ListView(
-              children: const [
-                // Text('Testing Drawer')
-              ],
-            ),
-          ),
+              //TODO: Uncomment this when want to add something in drawer
+          // drawer: Drawer(
+          //   child: ListView(
+          //     children: const [
+          //       // Text('Testing Drawer')
+          //     ],
+          //   ),
+          // ),
           body: TabBarView(children: [
             //This is the first sheet data
             Basketball(
@@ -175,7 +193,7 @@ class _HomeState extends State<Home> {
                           right: width * .04,
                           top: width * .03),
                       child: GestureDetector(
-                        onDoubleTap: () => Navigator.push(
+                        onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailPage(
@@ -199,14 +217,19 @@ class _HomeState extends State<Home> {
                                         height: height * .16,
                                         width: width * .3,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Image(
-                                              image: AssetImage(
-                                                'Assets/barca.png',
+                                              image: const AssetImage(
+                                                'Assets/Helmet.png',
                                               ),
-                                              width: width * .25,
-                                              height: width * .25,
+                                              width: width * .15,
+                                              height: width * .15,
                                               fit: BoxFit.fill,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
                                             ),
                                             Text(
                                               widget.feedback3[index].away
@@ -225,14 +248,19 @@ class _HomeState extends State<Home> {
                                         height: height * .16,
                                         width: width * .3,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Image(
                                               image: const AssetImage(
-                                                'Assets/barca.png',
+                                                'Assets/dball.png',
                                               ),
-                                              width: width * .25,
-                                              height: width * .25,
+                                              width: width * .15,
+                                              height: width * .15,
                                               fit: BoxFit.fill,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
                                             ),
                                             Text(
                                               widget.feedback3[index].home
@@ -261,11 +289,14 @@ class _HomeState extends State<Home> {
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        subtitle: Text('Away win',
+                                        subtitle: Icon(
+                                          Icons.arrow_upward,
+                                          color: Colors.green,
+                                        ), /*Text('',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
-                                                fontWeight: FontWeight.w500)),
+                                                fontWeight: FontWeight.w500))*/
                                       ),
                                     ),
                                     SizedBox(
@@ -296,7 +327,8 @@ class _HomeState extends State<Home> {
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                         subtitle: Text(
-                                          widget.feedback3[index].home_line.toString(),
+                                            widget.feedback3[index].home_line
+                                                .toString(),
                                             // '${widget.feedback3[index].bc_away_score.toString()} : ${widget.feedback3[index].bc_home_score.toString()}',
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
@@ -341,7 +373,7 @@ class _HomeState extends State<Home> {
       });
     }
     print(isTrue);
-    return isTrue
+    return !isTrue
         ? ListView.builder(
             itemCount: widget.feedback2.length,
             itemBuilder: (context, index) {
@@ -352,7 +384,7 @@ class _HomeState extends State<Home> {
                           right: width * .04,
                           top: width * .03),
                       child: GestureDetector(
-                        onDoubleTap: () => Navigator.push(
+                        onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailPage(
@@ -376,20 +408,25 @@ class _HomeState extends State<Home> {
                                         height: height * .16,
                                         width: width * .3,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                'Assets/barca.png',
+                                                'Assets/Helmet.png',
                                               ),
-                                              width: width * .25,
-                                              height: width * .25,
+                                              width: width * .15,
+                                              height: width * .15,
                                               fit: BoxFit.fill,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
                                             ),
                                             Text(
                                               widget.feedback2[index].away
                                                   .toString(),
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 21,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ],
@@ -402,20 +439,25 @@ class _HomeState extends State<Home> {
                                         height: height * .16,
                                         width: width * .3,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                'Assets/barca.png',
+                                                'Assets/dball.png',
                                               ),
-                                              width: width * .25,
-                                              height: width * .25,
+                                              width: width * .15,
+                                              height: width * .15,
                                               fit: BoxFit.fill,
+                                            ),
+                                            SizedBox(
+                                              height: 10,
                                             ),
                                             Text(
                                               widget.feedback2[index].home
                                                   .toString(),
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 21,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ],
@@ -438,11 +480,15 @@ class _HomeState extends State<Home> {
                                               fontSize: 12,
                                               fontWeight: FontWeight.w500),
                                         ),
-                                        subtitle: Text('Away win',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500)),
+                                        subtitle: Icon(
+                                          Icons.arrow_upward,
+                                          color: Colors.green,
+                                        ), 
+                                        // subtitle: Text('',
+                                        //     textAlign: TextAlign.center,
+                                        //     style: TextStyle(
+                                        //         fontSize: 12,
+                                        //         fontWeight: FontWeight.w500)),
                                       ),
                                     ),
                                     SizedBox(
@@ -473,7 +519,8 @@ class _HomeState extends State<Home> {
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                         subtitle: Text(
-                                          widget.feedback2[index].home_line.toString(),
+                                            widget.feedback2[index].home_line
+                                                .toString(),
                                             // '${widget.feedback2[index].bc_away_score.toString()} : ${widget.feedback2[index].bc_home_score.toString()}',
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(
@@ -512,7 +559,7 @@ class _HomeState extends State<Home> {
                           right: width * .04,
                           top: width * .03),
                       child: GestureDetector(
-                        onDoubleTap: () => Navigator.push(
+                        onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => DetailPage(
@@ -536,20 +583,25 @@ class _HomeState extends State<Home> {
                                         height: height * .16,
                                         width: width * .3,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                'Assets/barca.png',
+                                                'Assets/Hoops.png',
                                               ),
-                                              width: width * .25,
-                                              height: width * .25,
+                                              width: width * .15,
+                                              height: width * .15,
                                               fit: BoxFit.fill,
+                                            ),
+                                            SizedBox(
+                                              height: 10.0,
                                             ),
                                             Text(
                                               widget.feedback[index].away
                                                   .toString(),
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 21,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ],
@@ -562,20 +614,25 @@ class _HomeState extends State<Home> {
                                         height: height * .16,
                                         width: width * .3,
                                         child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             Image(
                                               image: AssetImage(
-                                                'Assets/barca.png',
+                                                'Assets/bball.png',
                                               ),
-                                              width: width * .25,
-                                              height: width * .25,
+                                              width: width * .15,
+                                              height: width * .150,
                                               fit: BoxFit.fill,
+                                            ),
+                                            SizedBox(
+                                              height: 10.0,
                                             ),
                                             Text(
                                               widget.feedback[index].home
                                                   .toString(),
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 21,
                                                   fontWeight: FontWeight.w500),
                                             ),
                                           ],
@@ -591,19 +648,17 @@ class _HomeState extends State<Home> {
                                       height: height * .1,
                                       width: width * .28,
                                       child: const ListTile(
-                                        title: Text(
-                                          'Projected Scores?',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        subtitle: Text('Away win',
+                                          title: Text(
+                                            'Projected Scores?',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontSize: 12,
-                                                fontWeight: FontWeight.w500)),
-                                      ),
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          subtitle: Icon(
+                                            Icons.arrow_upward,
+                                            color: Colors.green,
+                                          )),
                                     ),
                                     SizedBox(
                                       height: height * .1,
@@ -633,7 +688,8 @@ class _HomeState extends State<Home> {
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w500)),
                                         subtitle: Text(
-                                          widget.feedback[index].home_line.toString(),
+                                            widget.feedback[index].home_line
+                                                .toString(),
                                             // '${widget.feedback[index].bc_away_score.toString()} : ${widget.feedback[index].bc_home_score.toString()}',
                                             textAlign: TextAlign.center,
                                             style: const TextStyle(

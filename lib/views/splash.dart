@@ -33,7 +33,7 @@ class StartState extends State<SplashScreen> {
     // feedbacks = jsonFeedback.map((json) => FeedbackModel.fromJson(json));
 
     jsonFeedback.forEach((element) {
-      print('$element THIS IS NEXT>>>>>>>');
+      print('$element THIS IS basket ball>>>>>>>');
       FeedbackModel feedbackModel = FeedbackModel();
       feedbackModel.away = element['away'];
       feedbackModel.home = element['home'];
@@ -66,7 +66,7 @@ class StartState extends State<SplashScreen> {
     // feedbacks = jsonFeedback.map((json) => FeedbackModel.fromJson(json));
 
     jsonFeedback2.forEach((element2) {
-      print('$element2 THIS IS NEXT>>>>>>>');
+      print('$element2 THIS IS Foot Ball>>>>>>>');
       FeedbackModel feedbackModel2 = FeedbackModel();
       feedbackModel2.away = element2['away'];
       feedbackModel2.home = element2['home'];
@@ -98,7 +98,7 @@ class StartState extends State<SplashScreen> {
     // feedbacks = jsonFeedback.map((json) => FeedbackModel.fromJson(json));
 
     jsonFeedback3.forEach((element3) {
-      print('$element3 THIS IS NEXT>>>>>>>');
+      print('$element3 THIS IS Hand ball >>>>>>>');
       FeedbackModel feedbackModel3 = FeedbackModel();
       feedbackModel3.away = element3['away'];
       feedbackModel3.home = element3['home'];
@@ -118,11 +118,8 @@ class StartState extends State<SplashScreen> {
 
       feedbacks3.add(feedbackModel3);
     });
-    setState(() {
-    });
+    setState(() {});
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -160,17 +157,14 @@ class StartState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const <Widget>[
-            Icon(Icons.sports),
-            Padding(padding: EdgeInsets.only(top: 20.0)),
-            Text(
-              "Loading data ",
-              style: TextStyle(fontSize: 20.0, color: Colors.black),
+            Image(
+              image: AssetImage(
+                'Assets/pb.png',
+              ),
+              height: 300, // width * .25,
+              width: 300,
+              fit: BoxFit.fitWidth,
             ),
-            Padding(padding: EdgeInsets.only(top: 20.0)),
-            CircularProgressIndicator(
-              backgroundColor: Colors.white,
-              strokeWidth: 1,
-            )
           ],
         ),
       ),
